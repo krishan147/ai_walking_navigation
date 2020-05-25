@@ -1,0 +1,124 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://player/walkleft.tres" type="Animation" id=1]
+[ext_resource path="res://player/walkdown.tres" type="Animation" id=2]
+[ext_resource path="res://player/idleleft.tres" type="Animation" id=3]
+[ext_resource path="res://player/walkright.tres" type="Animation" id=4]
+[ext_resource path="res://player/idleup.tres" type="Animation" id=5]
+[ext_resource path="res://player/idledown.tres" type="Animation" id=6]
+[ext_resource path="res://player/walkup.tres" type="Animation" id=7]
+[ext_resource path="res://player/idleright.tres" type="Animation" id=8]
+[ext_resource path="res://staff/office_staff/staff_1.png" type="Texture" id=9]
+[ext_resource path="res://engine/staff.gd" type="Script" id=10]
+
+[sub_resource type="Animation" id=1]
+resource_name = "sitleft"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 10 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "sitright"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 11 ]
+}
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 19.811, 22.509 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 19.851, 22.678 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 2.561, 4.049 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 19.817, 22.512 )
+
+[node name="staff_1" type="KinematicBody2D"]
+script = ExtResource( 10 )
+
+[node name="anim" type="AnimationPlayer" parent="."]
+playback_speed = 2.0
+anims/idledown = ExtResource( 6 )
+anims/idleleft = ExtResource( 3 )
+anims/idleright = ExtResource( 8 )
+anims/idleup = ExtResource( 5 )
+anims/sitleft = SubResource( 1 )
+anims/sitright = SubResource( 2 )
+anims/walkdown = ExtResource( 2 )
+anims/walkleft = ExtResource( 1 )
+anims/walkright = ExtResource( 4 )
+anims/walkup = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 9 )
+vframes = 4
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, -8.739 )
+shape = SubResource( 3 )
+
+[node name="Position2D" type="Position2D" parent="."]
+visible = false
+
+[node name="hitbox" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+visible = false
+position = Vector2( 0, -8.957 )
+shape = SubResource( 4 )
+
+[node name="Pickup" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup"]
+position = Vector2( 0, 19.224 )
+shape = SubResource( 5 )
+
+[node name="Staff_Pick" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Staff_Pick"]
+position = Vector2( 0, -8.861 )
+shape = SubResource( 6 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
+visible = false
+
+[node name="mug_swig_timer" type="Timer" parent="."]
+autostart = true
+
+[node name="sitting_timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+[connection signal="area_entered" from="Staff_Pick" to="." method="_on_Staff_Pick_area_entered"]
+[connection signal="area_exited" from="Staff_Pick" to="." method="_on_Staff_Pick_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="mug_swig_timer" to="." method="_on_mug_swig_timer_timeout"]
+[connection signal="timeout" from="sitting_timer" to="." method="_on_sitting_timer_timeout"]
