@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://tileset/grid_lines/grid_lines_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://tileset/grid/tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://pathfind_astar.gd" type="Script" id=3]
 [ext_resource path="res://character.gd" type="Script" id=4]
-[ext_resource path="res://sprites/character.png" type="Texture" id=5]
+[ext_resource path="res://office_staff/staff_1.png" type="Texture" id=5]
+[ext_resource path="res://office_staff/walkdown.tres" type="Animation" id=6]
+[ext_resource path="res://office_staff/walkleft.tres" type="Animation" id=7]
+[ext_resource path="res://office_staff/walkright.tres" type="Animation" id=8]
+[ext_resource path="res://office_staff/walkup.tres" type="Animation" id=9]
 
 [node name="Game" type="Node"]
 
@@ -19,7 +23,7 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 tile_set = ExtResource( 2 )
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
-tile_data = PoolIntArray( -196602, 0, 0, 65537, 0, 0, 65541, 0, 0, 65545, 0, 0, 65550, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 458761, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0 )
+tile_data = PoolIntArray( -196602, 0, 0, 65537, 0, 0, 65538, 0, 0, 65541, 0, 0, 65545, 0, 0, 65550, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 458761, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0 )
 script = ExtResource( 3 )
 
 [node name="Character" type="Position2D" parent="."]
@@ -28,3 +32,11 @@ script = ExtResource( 4 )
 [node name="Sprite" type="Sprite" parent="Character"]
 position = Vector2( 7, 0 )
 texture = ExtResource( 5 )
+vframes = 4
+hframes = 3
+
+[node name="anim" type="AnimationPlayer" parent="Character/Sprite"]
+anims/walkdown = ExtResource( 6 )
+anims/walkleft = ExtResource( 7 )
+anims/walkright = ExtResource( 8 )
+anims/walkup = ExtResource( 9 )

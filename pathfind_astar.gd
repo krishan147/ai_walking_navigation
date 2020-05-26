@@ -10,6 +10,8 @@ export(Vector2) var map_size = Vector2(16, 16)
 var path_start_position = Vector2() setget _set_path_start_position
 var path_end_position = Vector2() setget _set_path_end_position
 
+
+
 var _point_path = []
 
 const BASE_LINE_WIDTH = 3.0
@@ -23,17 +25,6 @@ onready var _half_cell_size = cell_size / 2
 func _ready():
 	var walkable_cells_list = astar_add_walkable_cells(obstacles)
 	astar_connect_walkable_cells(walkable_cells_list)
-
-
-# Click and Shift force the start and end position of the path to update
-# and the node to redraw everything
-#func _input(event):
-#	if event.is_action_pressed('click') and Input.is_key_pressed(KEY_SHIFT):
-#		# To call the setter method from this script we have to use the explicit self.
-#		self.path_start_position = world_to_map(get_global_mouse_position())
-#	elif event.is_action_pressed('click'):
-#		self.path_end_position = world_to_map(get_global_mouse_position())
-
 
 # Loops through all cells within the map's bounds and
 # adds all points to the astar_node, except the obstacles
