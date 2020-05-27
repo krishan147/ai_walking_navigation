@@ -85,6 +85,9 @@ func calculate_point_index(point):
 
 
 func find_path(world_start, world_end):
+	
+	print (world_start, world_end)
+	
 	self.path_start_position = world_to_map(world_start)
 	self.path_end_position = world_to_map(world_end)
 	_recalculate_path()

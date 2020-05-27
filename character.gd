@@ -13,6 +13,9 @@ func _ready():
 func _change_state(new_state):
 	if new_state == STATES.FOLLOW:
 		path = get_parent().get_node('TileMap').find_path(position, target_position)
+		
+		
+		
 		if not path or len(path) == 1:
 			_change_state(STATES.IDLE)
 			return
@@ -53,7 +56,11 @@ func move_to(world_position):
 func _input(event):
 	if event.is_action_pressed('click'):
 		if Input.is_key_pressed(KEY_SHIFT):
-			global_position = get_global_mouse_position()
+			#global_position = get_global_mouse_position()
+			global_position.x = 753
+			global_position.y = 176
 		else:
-			target_position = get_global_mouse_position()
+			#target_position = get_global_mouse_position()
+			target_position.x = 753
+			target_position.y = 176
 		_change_state(STATES.FOLLOW)
